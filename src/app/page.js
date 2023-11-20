@@ -1,113 +1,132 @@
-import Image from 'next/image'
+'use client'
+import { useState, useEffect, useRef } from 'react';
+import Header from '@/components/Header/Header'
+import Game from '@/components/Home/Game'
+import AboutMe from '@/components/Home/AboutMe'
+import ContactForm from '@/components/Home/ContactForm'
+import UpButton from '@/components/Footer/UpButton'
+import More from '@/components/Home/More'
+import ProjectCarousel from '@/components/Home/ProjectCarousel'
+import WorkHistory from '@/components/Home/WorkHistory'
+import Footer from '@/components/Footer/Footer'
 
 export default function Home() {
+  const [showFooter, setShowFooter] = useState(false);
+  const aboutMeRef = useRef(null);
+  const downButtonRef = useRef(null);
+  const [darkMode, setDarkMode] = useState(true); 
+
+  const toggleTheme = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('darkMode', newDarkMode ? 'true' : 'false');
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedMode = sessionStorage.getItem('darkMode');
+      if (savedMode !== null) {
+        setDarkMode(savedMode === 'true');
+      }
+    }
+  }, []);
+
+  const scrollToAboutMe = () => {
+    aboutMeRef.current?.scrollIntoView({ behavior: 'smooth' });
+    console.log("clicked")
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (downButtonRef.current) {
+        const { bottom } = downButtonRef.current.getBoundingClientRect();
+        setShowFooter(bottom < 0); 
+      }
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const mySchema ={
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Randy Lee",
+    "description": "Randy Lee is a software engineer with a passion for business and technology. He is based in Toronto, Ontario",
+    "url": "https://www.randyclee.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/randyclee",
+      "https://www.github.com/randyclee"
+    ],
+    "jobTitle": "Software Engineer",
+    "alumniOf": "Queen’s University",
+    "knowsAbout": ["Software Engineering", "Computer Engineering", "Business", "Data Engineering", "Databases"],
+    "skill": ["Python", "Next.js", "JavaScript", "Tailwind", "React", "Business", "Databases", "SQL", "NoSQL"],
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "Software Engineer",
+      "yearsInOccupation": "2",
+      "mainEntityOfPage": "https://www.randyclee.com/resume"
+    },
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "Bachelors of Applied Science",
+        "recognizedBy": {
+          "@type": "EducationalOrganization",
+          "name": "Queen’s University"
+        }
+      }
+    ],
+  }
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://www.randyclee.com",
+    "name": "Randy Lee's Personal Website",
+    "author": {
+      "@type": "Person",
+      "name": "Randy Lee",
+      "url": "https://www.randyclee.com"
+    },
+    "description": "Randy Lee's personal website showcasing his software engineering projects, work history, skills and has some apps to use.",
+    "publisher": {
+      "@type": "Person",
+      "name": "Randy Lee"
+    }
+  };
+
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    
+    <div>
+      <script type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(mySchema) }}
+      />
+
+      <script type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      
+      <Header darkMode={darkMode} toggleTheme={toggleTheme} />
+      <Game darkMode={darkMode} toggleTheme={toggleTheme} scrollToAboutMe={scrollToAboutMe} downButtonRef = {downButtonRef}/>
+      <div ref={aboutMeRef}> 
+        <AboutMe darkMode={darkMode}/>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <ProjectCarousel darkMode={darkMode}/>
+      <WorkHistory darkMode = {darkMode}/>
+      <ContactForm darkMode={darkMode}/>
+      <UpButton onScrollToTop={scrollToTop} isButtonVisible={showFooter} darkMode={darkMode}/>
+      <More darkMode={darkMode}/>
+      <Footer darkMode={darkMode}/>
+    </div>
   )
 }
