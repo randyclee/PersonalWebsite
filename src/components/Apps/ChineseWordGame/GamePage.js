@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import WordDisplay from './WordDisplay';
-import jsonData from '@/mockData/Apps/WordGame/ChineseWords.json';
+import jsonData from '@/data/WordGame/ChineseWords.json';
 import Modal from './Modal'; 
 
 export default function Home({darkMode}) {

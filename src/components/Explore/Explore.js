@@ -1,25 +1,24 @@
 import { useEffect, useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import Link from 'next/link';
-import { fetchAllApps } from '@/services/api/appApi';
+import { fetchAllApps, heart } from '@/services/api/appApi';
 
 const AppCard = ({ darkMode, app }) => {
   const [hearts, setHearts] = useState(app.hearts);
   const [liked, setLiked] = useState(false);
 
-  const toggleLike = () => {
-    if (!liked) {
-      setHearts(hearts + 1);
-    } else {
-      setHearts(hearts - 1);
+  const toggleLike = (addId) => {
+    if(!liked){
+      heart(addId)
+      setLiked(true)
+      setHearts(hearts + 1);   
     }
-    setLiked(!liked);
   };
 
   return (
     <div className={`${darkMode ? "text-white bg-gray-800" : "text-black bg-white"}`}>
       <div className={`card ${darkMode ? "text-white bg-gray-800" : "text-black bg-white"} w-full md:w-96 bg-base-100 shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl m-4`}>
-        <figure><img src={app.image} alt={app.title} className="object-cover h-64 w-full" /></figure>
+        <figure><img src={`${process.env.APP_URL}${app.image}`} alt={app.title} className="object-cover h-64 w-full" /></figure>
         <div className={`card-body ${darkMode ? "text-white bg-gray-700 rounded" : "text-black bg-gray-200"}`}>
           <h2 className="card-title">{app.title}</h2>
           <p>{app.description}</p>
@@ -30,7 +29,7 @@ const AppCard = ({ darkMode, app }) => {
           </div>
           <div className="card-actions justify-end px-3 mt-4">
             <Link href={`/explore${app.link}`} className="btn btn-primary w-30 px-10">Go</Link>
-            <button onClick={toggleLike} className="btn btn-ghost">
+            <button onClick={() => toggleLike(app._id)} className="btn btn-ghost">
               {liked ? <FaHeart className="text-red-500" /> : <FaRegHeart />}
               <span className="ml-1">{hearts}</span>
             </button>

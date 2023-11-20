@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { FiUser, FiChevronUp, FiChevronDown } from 'react-icons/fi';
 import ProjectDetailsModal from './ProjectDetailsModal';
 import ProjectSubmissionModal from './ProjectSubmissionModal';
-import { fetchAllVotes } from '@/services/api/voteApi';
+import { fetchAllVotes, vote } from '@/services/api/voteApi';
 
 export default function VotePage({ darkMode }) {
   const [projects, setProjects] = useState([]);
@@ -107,15 +107,28 @@ export default function VotePage({ darkMode }) {
     setModalOpen(false);
   };
 
-  const handleVote = (projectId) => {
+  const handleVote = async (projectId) => {
     if (window.confirm('Are you sure you want to vote for this project?')) {
-      const updatedProjects = projects.map((p) =>
-        p.id === projectId ? { ...p, votes: p.votes + 1 } : p
-      );
-      setProjects(updatedProjects);
-      setToast({ show: true, message: 'Vote recorded!' });
+      try {
+        const response = await vote(projectId);
+  
+        if (response && response.success) { 
+          setProjects((prevProjects) =>
+            prevProjects.map((project) =>
+              project.id === projectId ? { ...project, votes: project.votes + 1 } : project
+            )
+          );
+          setToast({ show: true, message: 'Vote recorded!' });
+        } else {
+          setToast({ show: true, message: 'Failed to record vote.' });
+        }
+      } catch (error) {
+        console.error('Error voting:', error);
+        setToast({ show: true, message: 'An error occurred while voting.' });
+      }
     }
   };
+  
   const closeToast = () => {
     setToast({ show: false, message: '' });
   };
@@ -181,14 +194,14 @@ export default function VotePage({ darkMode }) {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {projects.map((project) => (
-          <div key={project.id} className={`${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} card w-full bg-base-100 shadow-xl relative`}>
+          <div key={project._id} className={`${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} card w-full bg-base-100 shadow-xl relative`}>
             {project.workInProgress && (
               <div className="absolute top-0 left-0 bg-yellow-500 text-white px-2 py-1 rounded">
                 Work In Progress
               </div>
             )}
             <figure>
-              <img className="object-cover h-48 w-full" src={project.imageUrl} alt="Project" />
+              <img className="object-cover h-48 w-full" src={`${process.env.APP_URL}${project.imageUrl}`} alt="Project" />
             </figure>
             <div className="card-body">
               <div className="flex justify-between">
@@ -219,7 +232,7 @@ export default function VotePage({ darkMode }) {
                 <button className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-full w-30" onClick={() => openModal(project)}>
                   Learn More
                 </button>
-                <button className="bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded-full w-30" onClick={() => handleVote(project.id)}>
+                <button className="bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded-full w-30" onClick={() => handleVote(project._id)}>
                   Vote
                 </button>
               </div>

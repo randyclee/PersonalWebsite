@@ -1,7 +1,7 @@
 const baseUrl = process.env.APP_API_URL;
 
-export const getData = async (page) => {
-  const response = await fetch(`${baseUrl}/getData`, {
+export const getData = async (language) => {
+  const response = await fetch(`${baseUrl}/CategoryGame/getData/${language}`, {
     method: 'GET',
   });
   return response.json();

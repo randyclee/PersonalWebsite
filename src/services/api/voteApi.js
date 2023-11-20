@@ -37,4 +37,11 @@ export const fetchAllVotes = async (page) => {
       });
       return response.json();
   };
+  export const vote = async (id) => {
+    const response = await fetch(`${baseUrl}/vote-project/${id}`, {
+        method: 'POST',
+    });
+    return response.json();
+};
+
   

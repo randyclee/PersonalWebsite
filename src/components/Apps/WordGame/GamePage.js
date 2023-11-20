@@ -1,8 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react';
 import WordDisplay from '@/components/Apps/WordGame/WordDisplay';
-import jsonData from '@/mockData/Apps/WordGame/Words.json';
-import Modal from './Modal'; // Adjust the path based on your file structure
+import jsonData from '@/data/WordGame/Words.json';
+import Modal from './Modal'; 
 
 export default function Home({darkMode}) {
     const [currentWords, setCurrentWords] = useState([]);

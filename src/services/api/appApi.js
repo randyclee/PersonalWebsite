@@ -37,3 +37,10 @@ export const deleteApp = async (id) => {
     return response.json();
 };
   
+export const heart = async (id) => {
+    const response = await fetch(`${baseUrl}/heart-app/${id}`, {
+        method: 'POST',
+    });
+    return response.json();
+};
+  
