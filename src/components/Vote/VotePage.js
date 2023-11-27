@@ -113,18 +113,14 @@ export default function VotePage({ darkMode }) {
   const handleVote = async (projectId) => {
     if (window.confirm('Are you sure you want to vote for this project?')) {
       try {
-        const response = await vote(projectId);
-  
-        if (response && response.success) { 
-          setProjects((prevProjects) =>
-            prevProjects.map((project) =>
-              project.id === projectId ? { ...project, votes: project.votes + 1 } : project
-            )
-          );
-          setToast({ show: true, message: 'Vote recorded!' });
-        } else {
-          setToast({ show: true, message: 'Failed to record vote.' });
-        }
+        await vote(projectId);
+        setProjects((prevProjects) =>
+          prevProjects.map((project) =>
+            project.id === projectId ? { ...project, votes: project.votes + 1 } : project
+          )
+        );
+        setToast({ show: true, message: 'Vote recorded!' });
+      
       } catch (error) {
         console.error('Error voting:', error);
         setToast({ show: true, message: 'An error occurred while voting.' });
