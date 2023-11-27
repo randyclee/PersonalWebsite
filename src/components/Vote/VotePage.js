@@ -119,6 +119,7 @@ export default function VotePage({ darkMode }) {
             project.id === projectId ? { ...project, votes: project.votes + 1 } : project
           )
         );
+        loadVotes();
         setToast({ show: true, message: 'Vote recorded!' });
       
       } catch (error) {
