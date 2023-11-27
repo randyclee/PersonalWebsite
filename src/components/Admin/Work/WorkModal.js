@@ -13,7 +13,8 @@ const WorkModal = ({ isOpen, onClose, work, isNew }) => {
     time: '',
     location: '', // New location field
     inResume:false,
-    description: [], // Description as an array of strings
+    description: [],
+    order: 100
   };
 
   const [workData, setWorkData] = useState(initialWorkData);
@@ -310,6 +311,20 @@ const WorkModal = ({ isOpen, onClose, work, isNew }) => {
               type="text"
               name="time"
               value={workData.time}
+              onChange={handleInputChange}
+              className="input input-bordered bg-white text-black border-black"
+              required
+            />
+          </div>
+
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Order</span>
+            </label>
+            <input
+              type="number"
+              name="order"
+              value={workData.order}
               onChange={handleInputChange}
               className="input input-bordered bg-white text-black border-black"
               required

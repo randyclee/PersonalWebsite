@@ -5,7 +5,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import Link from 'next/link';
 import { fetchBlog } from '@/services/api/blogsApi';
-
+import Head from 'next/head'; 
 
 
 const Home = ({params}) => {
@@ -98,9 +98,12 @@ const Home = ({params}) => {
     }
   }, []);
 
+  
+
 
   return (
     <div className={`${darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
+      
       <Header darkMode={darkMode} toggleTheme={toggleTheme}/>
       <div className={`max-w-5xl mx-auto px-6 mt-16`}>
       <div className="max-w-5xl mx-auto px-6 py-4 mt-16">
@@ -144,3 +147,4 @@ const Home = ({params}) => {
 };
 
 export default Home;
+

@@ -34,7 +34,7 @@ const WorkHistory = ({ darkMode }) => {
             onClick={() => toggleDescription(index)}
           >
             <div className="flex flex-col items-center text-center md:flex-row md:text-left md:items-start">
-              <img src={`${process.env.APP_URL}${job.logo}`} alt={`${job.company} Logo`} className="w-20 h-20 md:w-32 md:h-24 mb-4 md:mb-0 " />
+              <img src={`${process.env.APP_URL}${job.logo}`} alt={`${job.company} Logo`} className="w-20 h-20 md:w-32 md:h-24 mb-4 md:mb-0 object-contain" />
               <div className="flex-1 lg:ml-10">
                 <h3 className="font-bold text-xl mb-1">{job.title}</h3>
                 <p className="text-lg  mb-1">{job.company}</p>

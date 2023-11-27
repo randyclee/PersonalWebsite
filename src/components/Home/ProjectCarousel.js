@@ -8,7 +8,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import ProjectDetails from '@/components/Projects/ProjectDetails'
 import ImageModal from '@/components/ImageModal'; 
 import { fetchHighlightProjects } from '@/services/api/projectsApi';
-
+import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 
 const ProjectsCarousel = ({darkMode}) => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -49,15 +49,20 @@ const ProjectsCarousel = ({darkMode}) => {
       {
         breakpoint: 1024,
         settings: {
-          arrows: false,
+          arrows: true,
 
         }
       }
       ]
     };
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const toggleDescription = () => {
+      setIsExpanded(!isExpanded);
+    };
 
 
-  const handleImageClick = (project, image) => {
+  const handleImageClick = (image) => {
     setSelectedImage(image);
     setIsImageModalOpen(true);
   };
@@ -82,30 +87,37 @@ const ProjectsCarousel = ({darkMode}) => {
       }
     `}</style>
 
-    <style jsx global>{`
-      .slick-prev, .slick-next {
-        z-index: 1;
-      }
-      .slick-prev:before, .slick-next:before {
-        font-size: 2rem; 
-        color: ${darkMode ? 'white' : 'black'} !important; 
-      }
-      // If the arrows are not positioned correctly, adjust as follows:
-      .slick-prev {
-        left: 20vw; // Adjust as per your design
-      }
-      .slick-next {
-        right: 20vw; // Adjust as per your design
-      }
-    `}</style>
+<style jsx global>{`
+  .slider-container { 
+    position: relative;
+  }
+  .slick-prev, .slick-next {
+    position: absolute;
+    z-index: 1;
+    top: 50%; 
+    transform: translateY(-50%); 
+  }
+  .slick-prev {
+    left: 10vw; 
+  }
+  .slick-next {
+    right: 10vw; 
+  }
+  .slick-prev:before, .slick-next:before {
+    font-size: 2rem; 
+    color: ${darkMode ? 'white' : 'black'} !important; 
+  }
+`}</style>
+
                 
-    <div className="flex flex-col items-center justify-center py-10">
+    <div className="flex flex-col items-center justify-center py-10 ">
       <h2 className="text-3xl font-bold mb-2">Featured Projects</h2>
       <div className="w-full mx-auto pb-4">
   <Slider {...settings}>
     {projects.map((project, index) => (
-            <button key={index} className="p-4 focus:outline-none" onClick={() => handleProjectClick(project)}>
-            <div className="flex flex-col items-center space-y-4 w-[90vw] lg:w-[40vw] max-w-4xl mx-auto card shadow-lg pb-4 px-5 md:px-20">
+      
+            <button key={index} className="p-4 focus:outline-none" >
+            <div className="flex flex-col items-center space-y-4 w-[90vw] lg:w-[80vw] max-w-4xl mx-auto card shadow-lg pb-4 px-5 md:px-20">
           <div className="flex flex-wrap justify-center gap-2">
             {project.tags.map((tag, tagIndex) => (
               <span key={tagIndex} className="bg-gray-800 text-white rounded-full px-3 py-1 text-sm font-medium">
@@ -113,17 +125,30 @@ const ProjectsCarousel = ({darkMode}) => {
               </span>
             ))}
           </div>
-          <div className="w-full">
+          <div className="w-full flex justify-center">
             <img 
               src={`${process.env.APP_URL}${project.mainImage}`}
               alt={`Main Image for ${project.title}`}
-              className="w-full h-auto"
+              className="object-contain h-64 w-64 py-2 mx-auto "
+              onClick={() => handleImageClick(project.mainImage)}
             />
           </div>
-          <h3 className="text-2xl md:text-xl font-bold text-center">{project.title}</h3>
+          <h3 className="text-xl md:text-xl font-bold text-center">{project.title}</h3>
 
-          <p className="text-sm sm:text-base text-left w-full">{project.description}</p>
-  
+          <p className={`text-sm sm:text-base text-left w-full ${!isExpanded ? 'line-clamp-3' : ''}`}>
+                  {project.description}
+                </p>
+                <div className="text-center">
+                  <button
+                    className="text-center text-xl focus:outline-none"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleDescription();
+                    }}
+                  >
+                    {isExpanded ? <MdExpandLess /> : <MdExpandMore />}
+                  </button>
+                </div>  
           <div className="flex justify-center gap-4 w-full">
             {project.images.map((image, imgIndex) => (
                   <div key={imgIndex} className="w-10 h-10 md:w-20 md:h-20 rounded-full overflow-hidden border border-gray-300">
@@ -133,7 +158,7 @@ const ProjectsCarousel = ({darkMode}) => {
                       className="w-full h-full object-cover cursor-pointer"
                       onClick={(e) => {
                         e.stopPropagation(); 
-                        handleImageClick(project, image);
+                        handleImageClick(image);
                       }}
                     />
                   </div>

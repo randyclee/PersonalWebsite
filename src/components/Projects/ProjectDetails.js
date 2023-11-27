@@ -38,10 +38,10 @@ const ProjectDetailsModal = ({ project, isOpen, onClose }) => {
         <div className="space-y-6">
 
         <div className="flex flex-col space-y-4">
-          {['Description', 'Achievements', 'Takeaways', "Improvements", 'Tags'].map((heading, index) => (
+          {['Description', 'Achievements', 'Considerations', "Improvements", 'Tags'].map((heading, index) => (
             <div key={heading} className="bg-white p-4 rounded-lg shadow-lg">
               <h5 className="font-bold text-gray-900">{heading}</h5>
-              { heading === 'Tags' ? (
+              {heading === 'Tags' ? (
                 <div className="flex flex-wrap gap-2 mt-2">
                   {project.tags.map((tag, idx) => (
                     <span key={idx} className="bg-gray-200 text-gray-800 text-xs font-medium px-3 py-1 rounded-full">
@@ -49,6 +49,12 @@ const ProjectDetailsModal = ({ project, isOpen, onClose }) => {
                     </span>
                   ))}
                 </div>
+              ) : heading === 'Achievements' ? (
+                <ul className="list-disc pl-5 text-gray-700">
+                  {project.achievements.map((achievement, idx) => (
+                    <li key={idx}>{achievement}</li>
+                  ))}
+                </ul>
               ) : (
                 <p className="text-gray-700">{project[heading.toLowerCase().replace(/\s/g, '')]}</p>
               )}
@@ -56,10 +62,11 @@ const ProjectDetailsModal = ({ project, isOpen, onClose }) => {
           ))}
         </div>
 
+
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {project.images.map((image, index) => (
               <div key={index} className="rounded-lg shadow-lg cursor-pointer" onClick={() => openImageModal(image)}>
-                <Image src={image} alt={`Project ${project.title} image ${index}`} width={100} height={100} layout="responsive" className="rounded-lg" />
+                <img src={`${process.env.APP_URL}${image}`} alt={`Project ${project.title} image ${index}`} width={100} height={100} layout="responsive" className="rounded-lg" />
               </div>
             ))}
           </div>

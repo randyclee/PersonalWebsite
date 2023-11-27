@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: "Vote for a Project!",
-  description: 'Here are projects to be voted on',
+  description: 'Browse or suggest an idea for my next project. Be sure to vote on your favorite ones',
 }
 
 export default function RootLayout({ children }) {

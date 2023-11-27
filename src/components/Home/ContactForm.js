@@ -19,7 +19,7 @@ export default function ContactForm({darkMode}) {
   }
 
   return (
-    <div className={`flex justify-center items-center h-screen ${darkMode ? 'bg-gradient-to-l from-black via-gray-900 to-black text-white' : 'bg-gradient-to-l from-white via-gray-100 to-white text-black'}`}>
+    <div className={`flex justify-center items-center py-20 ${darkMode ? 'bg-gradient-to-l from-black via-gray-900 to-black text-white' : 'bg-gradient-to-l from-white via-gray-100 to-white text-black'}`}>
       <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
       />

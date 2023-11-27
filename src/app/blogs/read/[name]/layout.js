@@ -1,11 +1,18 @@
 import '@/app/globals.css'
 import { Inter } from 'next/font/google'
+import { fetchBlog } from '@/services/api/blogsApi';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
-  title: "Randy Lee's Resume",
-  description: 'Randy is a software engineer',
+import { Metadata, ResolvingMetadata } from 'next';
+
+export async function generateMetadata({params}) {
+  const component_item = await fetchBlog(params.name).then((res) => res);
+
+  return {
+    title: component_item.title,
+    description: component_item.summary,
+  };
 }
 
 export default function RootLayout({ children }) {

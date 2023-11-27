@@ -53,6 +53,11 @@ const Footer = ({darkMode}) => {
                     Resume
                     </Link>
                 </li>
+                <li>
+                    <Link href="/projects" className=" hover:text-white transition duration-300">
+                    Projects
+                    </Link>
+                </li>
             </ul>
             
           </div>

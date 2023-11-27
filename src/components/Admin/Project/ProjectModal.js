@@ -8,11 +8,11 @@ const ProjectModal = ({ isOpen, onClose, onSubmit, isNew, project }) => {
     title: '',
     mainImage: '/uploads/randy_lee_logo.png',
     tags: [],
-    achievements: '',
+    achievements: [],
     description: '',
     improvements: '',
     resumePoints: [],
-    takeaways: '',
+    considerations: '',
     resumeHeading:"",
     year:2023,
     images: [],
@@ -48,7 +48,21 @@ const ProjectModal = ({ isOpen, onClose, onSubmit, isNew, project }) => {
       setImagesPreview(prev => [...prev, URL.createObjectURL(file)]);
     }
   };
+
+  const handleAchievementChange = (index, value) => {
+    const newAchievements = [...projectData.achievements];
+    newAchievements[index] = value;
+    setProjectData({ ...projectData, achievements: newAchievements });
+  };
+
+  const handleAddAchievement = () => {
+    setProjectData({ ...projectData, achievements: [...projectData.achievements, ''] });
+  };
   
+  const handleRemoveAchievement = (index) => {
+    const filteredAchievements = projectData.achievements.filter((_, idx) => idx !== index);
+    setProjectData({ ...projectData, achievements: filteredAchievements });
+  };
 
   const handleDeleteImage = (e, imageIndex, isMainImage = false) => {
     e.preventDefault(); 
@@ -138,7 +152,7 @@ const ProjectModal = ({ isOpen, onClose, onSubmit, isNew, project }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    if (!projectData.title || !projectData.resumeHeading || !projectData.tags || !projectData.description || !projectData.achievements || !projectData.takeaways || !projectData.improvements || !projectData.year || !projectData.resumePoints ) {
+    if (!projectData.title || !projectData.resumeHeading || !projectData.tags || !projectData.description || !projectData.achievements || !projectData.considerations || !projectData.improvements || !projectData.year || !projectData.resumePoints ) {
       alert("Please fill in all required fields.");
       return;
     }
@@ -164,7 +178,7 @@ const ProjectModal = ({ isOpen, onClose, onSubmit, isNew, project }) => {
 
       // Append other fields
       Object.keys(projectData).forEach(key => {
-        if (key === 'tags' || key === 'resumePoints') {
+        if (key === 'tags' || key === 'resumePoints' || key === 'achievements') {
           projectData[key].forEach((item, index) => {
             formData.append(`${key}[${index}]`, item);
           });
@@ -242,15 +256,38 @@ const ProjectModal = ({ isOpen, onClose, onSubmit, isNew, project }) => {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Achievements</span>
+              <span className="label-text -mb-3">Achievements</span>
             </label>
-            <input type="text" name="achievements" value={projectData.achievements} onChange={handleInputChange} className="input input-bordered bg-white text-black border-black" required />
+            {projectData.achievements.map((achievement, index) => (
+              <div key={index} className="flex items-center">
+                <input
+                  type="text"
+                  value={achievement}
+                  onChange={(e) => handleAchievementChange(index, e.target.value)}
+                  className="mt-2 input border bg-white text-black border-black flex-1 mr-2"
+                />
+                <button
+                  type="button" 
+                  className="btn btn-error btn-xs"
+                  onClick={() => handleRemoveAchievement(index)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+            <button
+              type="button" 
+              className="btn btn-outline btn-sm mt-2"
+              onClick={handleAddAchievement}
+            >
+              Add Achievement
+            </button>
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Takeaways</span>
+              <span className="label-text">Considerations</span>
             </label>
-            <input type="text" name="takeaways" value={projectData.takeaways} onChange={handleInputChange} className="input input-bordered bg-white text-black border-black" required />
+            <input type="text" name="considerations" value={projectData.considerations} onChange={handleInputChange} className="input input-bordered bg-white text-black border-black" required />
           </div>
           <div className="form-control">
             <label className="label">

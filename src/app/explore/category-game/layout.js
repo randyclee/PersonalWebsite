@@ -4,8 +4,8 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: "Word Game",
-  description: 'Word Game',
+  title: "Categories Word Game",
+  description: 'Test your english skills by finding all words in a category. This is a fun game to play that will test your english skills',
 }
 
 export default function RootLayout({ children }) {

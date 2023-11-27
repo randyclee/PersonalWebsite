@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 const ImageModal = ({ isOpen, image, onClose }) => {
   if (!isOpen) return null;
@@ -7,28 +6,23 @@ const ImageModal = ({ isOpen, image, onClose }) => {
   return (
     <div 
       id="modal-overlay"
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 "
+      className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center p-4"
       style={{ zIndex: 100 }}
       onClick={onClose}
     >
-      <div onClick={onClose} className="relative bg-white shadow-lg" >
-        <button  className="absolute -top-[5vh] -left-[5vw] text-2xl text-white rounded-full px-2">
-          &times; 
+      <div onClick={(e) => onClose} className="relative bg-white shadow-lg overflow-auto" style={{ maxHeight: '80vh', maxWidth: '90vw' }}>
+        <button onClick={onClose} className="absolute top-4 left-4 text-2xl text-black bg-white rounded-full p-2">
+          &times;
         </button>
-        <div style={{ maxHeight: '80vh' }}>
-          <img 
-            src={image} 
-            alt="Project Image" 
-            layout="intrinsic" 
-            width={800} 
-            height={600} 
-            objectFit="contain" 
-            objectPosition="center"
-          />
-        </div>
+        <img 
+          src={`${process.env.APP_URL}${image}`} 
+          alt="Project Image" 
+          style={{ maxHeight: '100%', maxWidth: '100%', display: 'block', margin: 'auto' }}
+        />
       </div>
     </div>
   );
 };
 
 export default ImageModal;
+

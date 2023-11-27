@@ -1,39 +1,38 @@
 import { useState } from 'react';
+import { createVote } from '@/services/api/voteApi';
 import { FiX } from 'react-icons/fi'; 
 
 function ProjectSubmissionModal({ isOpen, onClose, onSubmit, darkMode }) {
-    const [toast, setToast] = useState({ show: false, message: '' });
-
   const [submission, setSubmission] = useState({
-    submitterName: '',
-    projectName: '',
+    name: '',
+    submitterName: '', 
     description: '',
-    useCase: '',
+    imageUrl: '',
+    businessUseCase: '',
+    workInProgress: false,
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
     setSubmission({ ...submission, [name]: value });
   };
 
-  const closeToast = () => {
-    setToast({ show: false, message: '' });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(submission);
-    setSubmission({
-      submitterName: '',
-      projectName: '',
-      description: '',
-      useCase: '',
+
+    const formData = new FormData();
+    Object.keys(submission).forEach(key => {
+        formData.append(key, submission[key]);
     });
-    setToast({ show: true, message: 'Project submitted successfully!' });
-    onClose();
+
+    console.log("Form data being sent:", formData); // Debugging line
+
+    const response = await createVote(formData);
+    onSubmit();
+    onClose(); 
+
   };
-
-
   if (!isOpen) return null;
 
   return (
@@ -59,7 +58,7 @@ function ProjectSubmissionModal({ isOpen, onClose, onSubmit, darkMode }) {
                 <label className="label" htmlFor="projectName">
                   <span className={`label-text ${darkMode? "bg-gray-800 text-white":"bg-white text-black"}`} >Project Name</span>
                 </label>
-                <input type="text" id="projectName" name="projectName" className={`textarea ${darkMode? "bg-gray-800 text-white border-gray-500":"bg-white text-black border-black"}`}  value={submission.projectName} onChange={handleInputChange} required />
+                <input type="text" id="projectName" name="name" className={`textarea ${darkMode? "bg-gray-800 text-white border-gray-500":"bg-white text-black border-black"}`}  value={submission.name} onChange={handleInputChange} required />
               </div>
               <div className="form-control">
                 <label className="label" htmlFor="description">
@@ -68,29 +67,19 @@ function ProjectSubmissionModal({ isOpen, onClose, onSubmit, darkMode }) {
                 <textarea id="description" name="description" className={`textarea ${darkMode? "bg-gray-800 text-white border-gray-500":"bg-white text-black border-black"}`} value={submission.description} onChange={handleInputChange} required />
               </div>
               <div className="form-control">
-                <label className="label" htmlFor="useCase">
-                  <span className={`label-text ${darkMode? "bg-gray-800 text-white":"bg-white text-black"}`} >Use Case</span>
+                <label className="label" htmlFor="businessUseCase">
+                  <span className={`label-text ${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"}`}>How would it Benefit the User?</span>
                 </label>
-                <textarea id="useCase" name="useCase" className={`textarea ${darkMode? "bg-gray-800 text-white border-gray-500":"bg-white text-black border-black"}`} value={submission.useCase} onChange={handleInputChange} required />
+                <textarea id="businessUseCase" name="businessUseCase" className={`textarea ${darkMode ? "bg-gray-800 text-white border-gray-500" : "bg-white text-black border-black"}`} value={submission.businessUseCase} onChange={handleInputChange} required />
               </div>
+
               <div className="modal-action justify-between">
                 <button className={`btn btn-outline ${darkMode? "bg-gray-800 text-white border-gray-500":"bg-white text-black border-black"}`}  onClick={() => onClose()}>Cancel</button>
                 <button className={`btn btn-outline ${darkMode? "bg-gray-800 text-white border-gray-500":"bg-white text-black border-black"}`}  type="submit">Submit</button>
               </div>
             </form>
           </div>
-          {toast.show && (
-            <div className="toast">
-            <div className="alert alert-success">
-                <div>
-                <span>{toast.message}</span>
-                </div>
-                <div className="flex-none">
-                <button className="btn btn-sm btn-ghost" onClick={() => closeToast}>Close</button>
-                </div>
-            </div>
-            </div>
-        )}
+     
         </div>
   );
 }

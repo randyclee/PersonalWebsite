@@ -10,11 +10,11 @@ export default function VotePage({ darkMode }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isSubmissionModalOpen, setSubmissionModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [toast, setToast] = useState({ show: false, message: '' });
   const [expandedDescriptions, setExpandedDescriptions] = useState(new Set());
   const descriptionRefs = useRef(new Map());
   const [overflowedDescriptions, setOverflowedDescriptions] = useState(new Set());
   const [projectsSchema, setProjectsSchema] = useState({});
+  const [toast, setToast] = useState({ show: false, message: '', success: true });
 
   useEffect(() => {
     loadVotes();
@@ -25,6 +25,9 @@ export default function VotePage({ darkMode }) {
     setProjects(data);
   };
 
+  const handleOpenSubmissionModal = () => {
+    setSubmissionModalOpen(true);
+  };
 
   useEffect(() => {
     const generateSchema = () => {
@@ -85,13 +88,13 @@ export default function VotePage({ darkMode }) {
     });
   }, [projects, expandedDescriptions]);
 
-  const toggleDescription = (id) => {
-    setExpandedDescriptions((prevExpandedDescriptions) => {
+  const toggleDescription = (projectId) => {
+    setExpandedDescriptions(prevExpandedDescriptions => {
       const newExpanded = new Set(prevExpandedDescriptions);
-      if (newExpanded.has(id)) {
-        newExpanded.delete(id);
+      if (newExpanded.has(projectId)) {
+        newExpanded.delete(projectId);
       } else {
-        newExpanded.add(id);
+        newExpanded.add(projectId);
       }
       return newExpanded;
     });
@@ -147,6 +150,11 @@ export default function VotePage({ darkMode }) {
       }
     });
   };
+  const   submitProject  = () => {
+    setToast({ show: true, message: 'Project submitted successfully!', success: true });
+
+    loadVotes();
+  };
 
   const checkOverflow = (element) => {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
@@ -185,17 +193,17 @@ export default function VotePage({ darkMode }) {
       <div className={`container mx-auto px-4 py-14 min-h-screen`}>
         <h1 className="text-4xl font-bold text-center mt-10 mb-3">Vote on Projects</h1>
         <div className="text-center mb-6">
-        <button
+          <button
             className="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-full"
-            onClick={() => setSubmissionModalOpen(true)}
-          >           
-          Submit a Project
+            onClick={handleOpenSubmissionModal}
+          >
+            Submit a Project
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {projects.map((project) => (
           <div key={project._id} className={`${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} card w-full bg-base-100 shadow-xl relative`}>
-            {project.workInProgress && (
+              {project.workInProgress && (
               <div className="absolute top-0 left-0 bg-yellow-500 text-white px-2 py-1 rounded">
                 Work In Progress
               </div>
@@ -213,20 +221,20 @@ export default function VotePage({ darkMode }) {
               </div>
               <p className="text-sm -mt-1">{`Submitted by ${project.submitterName || 'Anonymous'}`}</p>
               <p
-                id={`description-${project.id}`}
-                className={` line-clamp-3 ${expandedDescriptions.has(project.id) ? 'line-clamp-none' : ''}`}
-              >
-                {project.description}
-              </p>
-              {overflowedDescriptions.has(project.id) && (
-                <div className="text-center mt-2">
-                  <button
-                    className="btn btn-sm btn-ghost"
-                    onClick={() => toggleDescription(project.id)}
-                  >
-                    {expandedDescriptions.has(project.id) ? <FiChevronUp /> : <FiChevronDown />}
-                  </button>
-                </div>
+              id={`description-${project._id}`}
+              className={`line-clamp-3 ${expandedDescriptions.has(project._id) ? 'line-clamp-none' : ''}`}
+            >
+              {project.description}
+            </p>
+            {overflowedDescriptions.has(project._id) && (
+              <div className="text-center mt-2">
+                <button
+                  className="btn btn-sm btn-ghost"
+                  onClick={() => toggleDescription(project._id)}
+                >
+                  {expandedDescriptions.has(project._id) ? <FiChevronUp /> : <FiChevronDown />}
+                </button>
+              </div>
               )}
               <div className="card-actions justify-between mt-4">
                 <button className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-full w-30" onClick={() => openModal(project)}>
@@ -245,7 +253,6 @@ export default function VotePage({ darkMode }) {
           type="application/ld+json" 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsSchema) }} 
         />
-
         {isModalOpen && (
         <ProjectDetailsModal
               isOpen={isModalOpen}
@@ -259,6 +266,7 @@ export default function VotePage({ darkMode }) {
           isOpen={isSubmissionModalOpen}
           onClose={() => setSubmissionModalOpen(false)}
           darkMode = {darkMode}
+          onSubmit={() => submitProject()}
         />
         )}
         {toast.show && (
