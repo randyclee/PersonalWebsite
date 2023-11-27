@@ -6,6 +6,7 @@ import Footer from '@/components/Footer/Footer';
 import Link from 'next/link';
 import { fetchBlog } from '@/services/api/blogsApi';
 import Head from 'next/head'; 
+import ImageModal from '@/components/ImageModal'; // Import the ImageModal component
 
 
 const Home = ({params}) => {
@@ -98,7 +99,19 @@ const Home = ({params}) => {
     }
   }, []);
 
-  
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const openImageModal = (image) => {
+    setSelectedImage(image);
+    setIsImageModalOpen(true);
+  };
+
+  const closeImageModal = (e) => {
+    e.stopPropagation();
+    setIsImageModalOpen(false);
+  };
+
 
 
   return (
@@ -120,14 +133,14 @@ const Home = ({params}) => {
           </div>
         </div>
 
-        <img src={`${process.env.APP_URL}${blogData?.mainImage}`} alt="" width={800} height={400} className="w-full h-64 object-cover mb-4 rounded-lg" />
+        <img src={`${process.env.APP_URL}${blogData?.mainImage}`}  href="#" onClick={() => openImageModal(blogData?.mainImage)} alt="" width={800} height={400} className="w-full h-64 object-cover mb-4 rounded-lg" />
 
         {blogData?.sections.map((section, index) => (
           <div key={index} className="mb-6">
             <h2 className="text-2xl font-semibold mb-2">{section.header}</h2>
             <p className="mb-2">{section.content}</p>
             {section.image && (
-              <img src={`${process.env.APP_URL}${section.image}`} alt="" width={800} height={400} className="w-3/4 mx-auto h-64 object-cover mb-2 rounded-lg" />
+              <img src={`${process.env.APP_URL}${section.image}`} href="#" onClick={() => openImageModal(section.image)}  alt="" width={800} height={400} className="w-3/4 mx-auto h-64 object-cover mb-2 rounded-lg" />
             )}
           </div>
         ))}
@@ -141,6 +154,13 @@ const Home = ({params}) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {isImageModalOpen && (
+        <ImageModal
+          image={selectedImage}
+          isOpen={isImageModalOpen}
+          onClose={closeImageModal}
+        />
+      )}
       <Footer darkMode={darkMode}/>
     </div>
   );

@@ -130,6 +130,7 @@ const ProjectsCarousel = ({darkMode}) => {
               src={`${process.env.APP_URL}${project.mainImage}`}
               alt={`Main Image for ${project.title}`}
               className="object-contain h-64 w-64 py-2 mx-auto "
+              href="#"
               onClick={() => handleImageClick(project.mainImage)}
             />
           </div>
@@ -156,6 +157,7 @@ const ProjectsCarousel = ({darkMode}) => {
                       src={`${process.env.APP_URL}${image}`}
                       alt={`Project ${project.title} Image ${imgIndex + 1}`}
                       className="w-full h-full object-cover cursor-pointer"
+                      href="#"
                       onClick={(e) => {
                         e.stopPropagation(); 
                         handleImageClick(image);

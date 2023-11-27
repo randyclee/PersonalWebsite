@@ -10,7 +10,6 @@ const ImageModal = ({ isOpen, image, onClose }) => {
       onClick={onClose}
     >
       <div 
-        onClick={(e) => e.stopPropagation()} 
         className="relative shadow-lg overflow-auto max-h-[80vh] max-w-[90vw] p-4"
       >
         <button 
