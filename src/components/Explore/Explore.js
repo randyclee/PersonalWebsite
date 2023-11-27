@@ -113,7 +113,7 @@ const Explore = ({darkMode}) => {
 
         <div className="flex flex-wrap justify-center gap-4">
         {filteredApps.map((app) => (
-          <AppCard key={app.id} app={app} darkMode ={darkMode} />
+          <AppCard key={app._id} app={app} darkMode ={darkMode} />
         ))}
         <EmptyCard darkMode = {darkMode} />
       </div>

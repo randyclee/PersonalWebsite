@@ -22,7 +22,7 @@ export default function AboutMe({ darkMode }) {
         <h2 className="text-3xl font-semibold text-center mb-6">
           About Me
         </h2>
-        <p className="text-lg leading-relaxed">
+        <p className="text-md md:text-lg leading-relaxed">
           I started my coding journey as part of the robotics team in high school. This led me to study Computer Engineering, where I also got myself a Certificate in Business.
           I love building, designing and implementing things, while also solving their business applications. Here are some of my favorite tech stacks and interests:
         </p>
@@ -67,8 +67,8 @@ export default function AboutMe({ darkMode }) {
 
         </div>
 
-        <p className="text-lg leading-relaxed">
-          Aside from computers, I am a big fan of basketball, stocks, hanging with friends, and cooking new dishes.
+        <p className="text-md md:text-lg leading-relaxed">
+          Aside from computers, I am a big fan of basketball, finance, socializing, and cooking.
         </p>
       </div>
     </div>

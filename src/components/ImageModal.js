@@ -6,18 +6,23 @@ const ImageModal = ({ isOpen, image, onClose }) => {
   return (
     <div 
       id="modal-overlay"
-      className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center p-4"
-      style={{ zIndex: 100 }}
+      className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center p-4 z-50"
       onClick={onClose}
     >
-      <div onClick={(e) => onClose} className="relative bg-white shadow-lg overflow-auto" style={{ maxHeight: '80vh', maxWidth: '90vw' }}>
-        <button onClick={onClose} className="absolute top-4 left-4 text-2xl text-black bg-white rounded-full p-2">
+      <div 
+        onClick={(e) => e.stopPropagation()} 
+        className="relative shadow-lg overflow-auto max-h-[80vh] max-w-[90vw] p-4"
+      >
+        <button 
+          onClick={onClose} 
+          className="absolute top-4 left-4 text-2xl text-black rounded-full p-2 focus:outline-none"
+        >
           &times;
         </button>
         <img 
           src={`${process.env.APP_URL}${image}`} 
           alt="Project Image" 
-          style={{ maxHeight: '100%', maxWidth: '100%', display: 'block', margin: 'auto' }}
+          className="max-h-full max-w-full block m-auto"
         />
       </div>
     </div>
@@ -25,4 +30,3 @@ const ImageModal = ({ isOpen, image, onClose }) => {
 };
 
 export default ImageModal;
-

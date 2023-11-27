@@ -133,9 +133,9 @@ const ProjectsCarousel = ({darkMode}) => {
               onClick={() => handleImageClick(project.mainImage)}
             />
           </div>
-          <h3 className="text-xl md:text-xl font-bold text-center">{project.title}</h3>
+          <h3 className="text-xl md:text-2xl font-bold text-center">{project.title}</h3>
 
-          <p className={`text-sm sm:text-base text-left w-full ${!isExpanded ? 'line-clamp-3' : ''}`}>
+          <p className={`text-md md:text-lg sm:text-base text-left w-full ${!isExpanded ? 'line-clamp-3' : ''}`}>
                   {project.description}
                 </p>
                 <div className="text-center">

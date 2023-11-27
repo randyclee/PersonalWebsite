@@ -7,7 +7,6 @@ import { FiSun, FiMoon, FiArrowDown } from 'react-icons/fi';
 
 
 export default function RandysWebsite({ darkMode, toggleTheme, scrollToAboutMe, downButtonRef }) {
-  console.log(darkMode)
   const canvasRef = useRef(null);
   const obstacleRefs = useRef([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
