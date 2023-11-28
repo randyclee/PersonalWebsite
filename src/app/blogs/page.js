@@ -14,6 +14,8 @@ const BlogPreview = ({ darkMode, post }) => {
 
   return (
     <div className={`block p-4 shadow-xl ${darkMode?"bg-gray-700":"br-gray-200"} rounded-lg transition-all duration-300 ${expanded ? 'h-auto' : 'h-96'} w-full`}>
+        <a href={`/blogs/read/${post.slug}`} >
+
       <img
         src={`${process.env.APP_URL}${post.mainImage}`}
         alt={post.title}
@@ -24,7 +26,8 @@ const BlogPreview = ({ darkMode, post }) => {
         <h2 className="text-xl font-bold mb-2 text-center">{post.title}</h2>
         <p className={`text-center text-sm ${!expanded ? 'line-clamp-3' : ''}`}>{post.summary}</p>
       </div>
-      <button onClick={toggleExpanded} className="text-center w-full mt-2 text-blue-300 hover:text-blue-800">
+      </a>
+      <button onClick={toggleExpanded} className="text-center w-full mt-2 text-blue-400 mb-2">
         {expanded ? 'Less ↑' : 'More ↓'}
       </button>
     </div>
@@ -141,7 +144,7 @@ const Main = () => {
   return (
     <div className={`${darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
       <Header darkMode={darkMode} toggleTheme={toggleTheme}/>
-      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 mt-16 h-screen`}>
+      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 mt-16`}>
         <h1 className="text-4xl font-bold mb-6">Latest Blog Posts</h1>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 ">
             {blogPosts.map((post, index) => (
