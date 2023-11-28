@@ -23,6 +23,7 @@ const BlogManager = () => {
   const loadEditBlog = async (blogId) => {
     try {
       const blog = await fetchBlog(blogId);
+      console.log(blog);
       setCurrentBlog(blog);
       setIsNew(false);
       setIsModalOpen(true);

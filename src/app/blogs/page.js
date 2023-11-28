@@ -5,23 +5,29 @@ import React, {useState, useEffect} from 'react';
 import Image from 'next/image';
 import { fetchAllBlogs } from '@/services/api/blogsApi';
 
-const BlogPreview = ({ post, large }) => {
+const BlogPreview = ({ darkMode, post }) => {
+  const [expanded, setExpanded] = useState(false);
 
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  };
 
   return (
-    <a href={`/blogs/read/${post.slug}`} className="block p-4 card shadow-xl">
+    <div className={`block p-4 shadow-xl ${darkMode?"bg-gray-700":"br-gray-200"} rounded-lg transition-all duration-300 ${expanded ? 'h-auto' : 'h-96'} w-full`}>
       <img
         src={`${process.env.APP_URL}${post.mainImage}`}
-        alt=""
-        width={800}
-        height={400}
-        className={`object-cover mb-2 ${large ? 'h-64 w-full' : 'h-32 w-full'}`}
+        alt={post.title}
+        className="object-cover mb-2 w-full rounded-lg"
+        style={{ height: expanded ? 'auto' : '50%' }}
       />
-      <div>
-        <h2 className={`text-2xl font-bold mb-2 text-center ${large ? 'text-2xl' : ''}`}>{post.title}</h2>
-        <p className="text-center text-lg">{post.summary}</p>
+      <div className="overflow-hidden" style={{ maxHeight: expanded ? 'none' : '50%' }}>
+        <h2 className="text-xl font-bold mb-2 text-center">{post.title}</h2>
+        <p className={`text-center text-sm ${!expanded ? 'line-clamp-3' : ''}`}>{post.summary}</p>
       </div>
-    </a>
+      <button onClick={toggleExpanded} className="text-center w-full mt-2 text-blue-300 hover:text-blue-800">
+        {expanded ? 'Less ↑' : 'More ↓'}
+      </button>
+    </div>
   );
 };
 
@@ -140,7 +146,7 @@ const Main = () => {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 ">
             {blogPosts.map((post, index) => (
               <div key={index} className="w-full">
-                <BlogPreview post={post} large={index === 0} />
+                <BlogPreview darkMode={darkMode} post={post} large={index === 0} />
               </div>
             ))}
           </div>

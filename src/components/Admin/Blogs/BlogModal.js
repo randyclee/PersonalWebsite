@@ -309,19 +309,20 @@ const CreateBlog = ({inpBlogData, onClose, isNew}) => {
                 onChange={(e) => handleImageUpload(e, index)}
                 className="hidden"
               />
-            {section.image && (
+
+            {section.image && section.image !== "null" && (
               <div className="mt-2">
                 {section.image instanceof File ? (
                  <img
                  src={URL.createObjectURL(section.image)}
-                 alt="Main Image Preview"
+                 alt="Section Image Preview"
                  className="cursor-pointer rounded-md h-20 w-auto"
                  onClick={() => openImageModal(process.env.APP_URL+section.image)}
                />
               ) :(
                 <img
                 src={process.env.APP_URL+section.image}
-                alt="Main Image Preview"
+                alt="Section Image Preview"
                 className="cursor-pointer rounded-md h-20 w-auto"
                 onClick={() => openImageModal(process.env.APP_URL+section.image)}
               />

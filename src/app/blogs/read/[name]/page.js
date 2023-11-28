@@ -133,17 +133,24 @@ const Home = ({params}) => {
           </div>
         </div>
 
-        <img src={`${process.env.APP_URL}${blogData?.mainImage}`}  href="#" onClick={() => openImageModal(blogData?.mainImage)} alt="" width={800} height={400} className="w-full h-64 object-cover mb-4 rounded-lg" />
-
         {blogData?.sections.map((section, index) => (
           <div key={index} className="mb-6">
             <h2 className="text-2xl font-semibold mb-2">{section.header}</h2>
             <p className="mb-2">{section.content}</p>
-            {section.image && (
-              <img src={`${process.env.APP_URL}${section.image}`} href="#" onClick={() => openImageModal(section.image)}  alt="" width={800} height={400} className="w-3/4 mx-auto h-64 object-cover mb-2 rounded-lg" />
+            {section.image && section.image !== "null" && (
+              <img 
+                src={`${process.env.APP_URL}${section.image}`} 
+                href="#" 
+                onClick={() => openImageModal(section.image)} 
+                alt={section.header} 
+                width={800} 
+                height={400} 
+                className="w-3/4 mx-auto h-64 object-cover mb-2 rounded-lg" 
+              />
             )}
           </div>
         ))}
+
       </div>
       </div>
       <script

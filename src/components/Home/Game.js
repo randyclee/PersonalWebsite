@@ -55,19 +55,34 @@ export default function RandysWebsite({ darkMode, toggleTheme, scrollToAboutMe, 
   const startGame = () => {
     setGameStarted(true);
     setScore(0);
-    setSnake([{ x: 50, y: 100 }]); 
-    setFood({ x: 100, y: 100 }); 
-    directionRef.current ={ x: 10, y: 0 }; 
-
+    setSnake([{ x: 50, y: 100 }]);
+    directionRef.current = { x: 10, y: 0 };
+  
     const topMargin = 16 * 4;
     const gameArea = {
       top: topMargin,
       right: window.innerWidth,
-      bottom: window.innerHeight, 
+      bottom: window.innerHeight,
       left: 0,
     };
     setGameArea(gameArea);
+  
+    // Generate random initial position for the food
+    const randomFoodPosition = () => {
+      let newFood;
+      do {
+        newFood = {
+          x: Math.floor(Math.random() * (gameArea.right - gameArea.left) / 10) * 10 + gameArea.left,
+          y: Math.floor(Math.random() * (gameArea.bottom - gameArea.top) / 10) * 10 + gameArea.top,
+        };
+      } while (doesCollideWithObstacles(newFood));
+      return newFood;
+    };
+    const initialFoodPosition = randomFoodPosition();
+    setFood(initialFoodPosition);
   };
+  
+
 
   const endGame = () => {
     setGameStarted(false);
