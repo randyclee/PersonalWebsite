@@ -10,10 +10,10 @@ const ActionButtons = ({darkMode}) => {
       </h2>
 
       <div className="flex flex-wrap justify-around gap-10 mt-4 w-full max-w-4xl">
-        <Link href="/discover" passHref>
+        <Link href="/explore" passHref>
           <p className={`btn flex hover:border-black border-black flex-col items-center transform hover:scale-105 focus:scale-105 focus:outline-none transition duration-300 hover:bg-blue-600 font-bold py-3 px-5 rounded-lg w-48 h-36 justify-center text-lg ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-300 text-black'}`}>
             <FaSearch className="mb-2" size={24} />
-            Discover
+            Explore
           </p>
         </Link>
 
