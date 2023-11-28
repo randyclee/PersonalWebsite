@@ -36,7 +36,7 @@ const ProjectsCarousel = ({darkMode}) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 10000,
     cssEase: "linear",
     pauseOnHover: true,
     arrows: true, 
@@ -126,13 +126,17 @@ const ProjectsCarousel = ({darkMode}) => {
               </span>
             ))}
           </div>
-          <div className="w-full flex justify-center">
-            <img 
+          <div className="w-full flex justify-center"
+          href="#"
+          onClick={() => handleImageClick(project.mainImage)}
+          >
+            <Image 
               src={`${process.env.APP_URL}${project.mainImage}`}
               alt={`Main Image for ${project.title}`}
               className="object-contain h-64 w-64 py-2 mx-auto "
-              href="#"
-              onClick={() => handleImageClick(project.mainImage)}
+              width={800}
+              height={500}
+              
             />
           </div>
           <h3 className="text-xl md:text-2xl font-bold text-center">{project.title}</h3>
@@ -153,18 +157,19 @@ const ProjectsCarousel = ({darkMode}) => {
                 </div>  
           <div className="flex justify-center gap-4 w-full">
             {project.images.map((image, imgIndex) => (
-                  <div key={imgIndex} className="w-10 h-10 md:w-20 md:h-20 rounded-full overflow-hidden border border-gray-300">
+                  <div key={imgIndex} href="#" className="w-10 h-10 md:w-20 md:h-20 rounded-full overflow-hidden border border-gray-300"
+                  onClick={(e) => {
+                    e.stopPropagation(); 
+                    handleImageClick(image);
+                  }}
+                  >
                     <Image 
                       src={`${process.env.APP_URL}${image}`}
                       alt={`Project ${project.title} Image ${imgIndex + 1}`}
-                      className="w-full h-full object-cover cursor-pointer"
-                      href="#"
+                      className="w-full h-full object-cover cursor-pointer"    
                       width= {800}
                       height={500}
-                      onClick={(e) => {
-                        e.stopPropagation(); 
-                        handleImageClick(image);
-                      }}
+                      
                     />
                   </div>
                 ))}

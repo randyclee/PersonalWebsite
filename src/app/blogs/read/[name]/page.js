@@ -127,7 +127,7 @@ const Home = ({params}) => {
         <h1 className="text-4xl font-bold mb-2 text-center">{blogData?.title}</h1>
         <p className="text-2xl mb-4">{blogData?.summary}</p>
         <div className="flex items-center mb-6">
-          <Image width={1200} height={500} src={blogData?.author.image} alt="author" width={800} height={400} className="w-10 h-10 rounded-full mr-4" />
+          <Image width={1200} height={500} src={blogData?.author.image} alt="author"  className="w-10 h-10 rounded-full mr-4" />
           <div>
             <p className="text-sm">{new Date(blogData?.date).toLocaleDateString()}</p>
             <p className="text-lg font-semibold">{blogData?.author.name}</p>
@@ -139,17 +139,17 @@ const Home = ({params}) => {
             <h2 className="text-2xl font-semibold mb-2">{section.header}</h2>
             <p className="mb-2">{section.content}</p>
             {section.image && section.image !== "null" && (
-              <Image 
+              <div href="#" 
+              onClick={() => openImageModal(section.image)} >
+                 <Image 
                 width={1200} 
                 height={500}  
                 src={`${process.env.APP_URL}${section.image}`} 
-                href="#" 
-                onClick={() => openImageModal(section.image)} 
+                
                 alt={section.header} 
-                width={800} 
-                height={400} 
-                className="w-3/4 mx-auto h-64 object-cover mb-2 rounded-lg" 
+                className="w-full md:w-3/4 mx-auto h-64 object-contain mb-2 rounded-lg" 
               />
+              </div>
             )}
           </div>
         ))}
