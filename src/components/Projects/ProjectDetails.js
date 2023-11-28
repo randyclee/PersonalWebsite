@@ -65,8 +65,8 @@ const ProjectDetailsModal = ({ project, isOpen, onClose }) => {
 
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {project.images.map((image, index) => (
-              <div key={index} className="rounded-lg shadow-lg cursor-pointer" href="#" onClick={() => openImageModal(image)}>
-                <img src={`${process.env.APP_URL}${image}`} alt={`Project ${project.title} image ${index}`} width={100} height={100} layout="responsive" className="rounded-lg" />
+              <div key={index} className="rounded-lg shadow-lg cursor-pointer"  onClick={() => openImageModal(image)}>
+                <Image height={800} width={500} src={`${process.env.APP_URL}${image}`} alt={`Project ${project.title} image ${index}`} width={100} height={100} layout="responsive" className="rounded-lg" />
               </div>
             ))}
           </div>

@@ -9,6 +9,7 @@ import ProjectDetails from '@/components/Projects/ProjectDetails'
 import ImageModal from '@/components/ImageModal'; 
 import { fetchHighlightProjects } from '@/services/api/projectsApi';
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
+import Image from 'next/image';
 
 const ProjectsCarousel = ({darkMode}) => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -153,11 +154,13 @@ const ProjectsCarousel = ({darkMode}) => {
           <div className="flex justify-center gap-4 w-full">
             {project.images.map((image, imgIndex) => (
                   <div key={imgIndex} className="w-10 h-10 md:w-20 md:h-20 rounded-full overflow-hidden border border-gray-300">
-                    <img 
+                    <Image 
                       src={`${process.env.APP_URL}${image}`}
                       alt={`Project ${project.title} Image ${imgIndex + 1}`}
                       className="w-full h-full object-cover cursor-pointer"
                       href="#"
+                      width= {800}
+                      height={500}
                       onClick={(e) => {
                         e.stopPropagation(); 
                         handleImageClick(image);

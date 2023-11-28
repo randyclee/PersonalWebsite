@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import Link from 'next/link';
 import { fetchAllApps, heart } from '@/services/api/appApi';
+import Image from 'next/image';
 
 const AppCard = ({ darkMode, app }) => {
   const [hearts, setHearts] = useState(app.hearts);
@@ -18,7 +19,7 @@ const AppCard = ({ darkMode, app }) => {
   return (
     <div className={`${darkMode ? "text-white bg-gray-800" : "text-black bg-white"}`}>
       <div className={`card ${darkMode ? "text-white bg-gray-800" : "text-black bg-white"} w-full md:w-96 bg-base-100 shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl m-4`}>
-        <figure><img src={`${process.env.APP_URL}${app.image}`} alt={app.title} className="object-cover h-64 w-full" /></figure>
+        <figure><Image width={500} height={800} src={`${process.env.APP_URL}${app.image}`} alt={app.title} className="object-cover h-64 w-full" /></figure>
         <div className={`card-body ${darkMode ? "text-white bg-gray-700 rounded" : "text-black bg-gray-200"}`}>
           <h2 className="card-title">{app.title}</h2>
           <p>{app.description}</p>

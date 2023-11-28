@@ -18,7 +18,7 @@ function ProjectDetailsModal({ isOpen, onClose, selectedProject, darkMode }) {
         <h3 className="font-bold text-lg text-center">{selectedProject.name}</h3>
         <p className="text-center text-sm mt-1">{`Submitted by ${selectedProject.submitter || 'Anonymous'}`}</p>
         <figure>
-          <img className="w-full h-64 object-cover mt-4" src={`${process.env.APP_URL}${selectedProject.imageUrl}`} alt="Project" />
+          <Image width={500} height={800} className="w-full h-64 object-cover mt-4" src={`${process.env.APP_URL}${selectedProject.imageUrl}`} alt="Project" />
         </figure>
         <div className="py-4 space-y-4">
           <div className="shadow p-3">

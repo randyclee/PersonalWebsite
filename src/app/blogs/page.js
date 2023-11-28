@@ -16,7 +16,9 @@ const BlogPreview = ({ darkMode, post }) => {
     <div className={`block p-4 shadow-xl ${darkMode?"bg-gray-700":"br-gray-200"} rounded-lg transition-all duration-300 ${expanded ? 'h-auto' : 'h-96'} w-full`}>
         <a href={`/blogs/read/${post.slug}`} >
 
-      <img
+      <Image
+        width = {500}
+        height={800}
         src={`${process.env.APP_URL}${post.mainImage}`}
         alt={post.title}
         className="object-cover mb-2 w-full rounded-lg"

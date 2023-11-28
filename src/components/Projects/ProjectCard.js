@@ -1,5 +1,6 @@
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 const ProjectCard = ({ project, darkMode, onCardClick }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -14,7 +15,7 @@ const ProjectCard = ({ project, darkMode, onCardClick }) => {
       className={`${darkMode ? "bg-gray-900 text-gray-300" : "bg-white text-black"} rounded-lg shadow-md overflow-hidden`}
       onClick={onCardClick}
     >
-      <img src={`${process.env.APP_URL}${project.mainImage}`} alt={project.title} className="w-full h-48 object-cover" />
+      <Image height={800} width={500} src={`${process.env.APP_URL}${project.mainImage}`} alt={project.title} className="w-full h-48 object-cover" />
       <div className="p-4">
         <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
         <p className={`mb-3 ${!isExpanded ? "line-clamp-3" : ""}`}>{project.description}</p>

@@ -1,6 +1,7 @@
 'use client'
 import Header from '@/components/Header/Header'
-import Explore from '@/components/Explore/Explore'
+import React, { Suspense, lazy } from 'react';
+const Explore = lazy(() => import('@/components/Explore/Explore'));
 import Footer from '@/components/Footer/Footer'
 import { useState, useEffect } from 'react';
 

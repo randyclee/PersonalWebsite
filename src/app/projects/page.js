@@ -1,6 +1,7 @@
 'use client'
 import Header from '@/components/Header/Header'
-import ProjectCarousel from '@/components/Projects/ProjectsPage'
+import React, { Suspense, lazy } from 'react';
+const ProjectCarousel = lazy(() => import('@/components/Projects/ProjectsPage'));
 import Footer from '@/components/Footer/Footer'
 import { useState, useEffect } from 'react';
 

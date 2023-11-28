@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 const ImageModal = ({ isOpen, image, onClose }) => {
   if (!isOpen) return null;
@@ -18,7 +19,9 @@ const ImageModal = ({ isOpen, image, onClose }) => {
         >
           &times;
         </button>
-        <img 
+        <Image
+          width={1200}
+          height={1600} 
           src={`${process.env.APP_URL}${image}`} 
           alt="Project Image" 
           className="max-h-full max-w-full block m-auto"

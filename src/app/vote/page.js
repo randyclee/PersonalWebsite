@@ -1,6 +1,7 @@
 'use client'
 import Header from '@/components/Header/Header'
-import VotePage from '@/components/Vote/VotePage'
+import React, { Suspense, lazy } from 'react';
+const VotePage = lazy(() => import('@/components/Vote/VotePage'));
 import Footer from '@/components/Footer/Footer'
 import { useState, useEffect } from 'react';
 

@@ -1,13 +1,14 @@
 'use client'
+import React, { Suspense, lazy } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import Header from '@/components/Header/Header'
-import Game from '@/components/Home/Game'
-import AboutMe from '@/components/Home/AboutMe'
-import ContactForm from '@/components/Home/ContactForm'
-import UpButton from '@/components/Footer/UpButton'
-import More from '@/components/Home/More'
-import ProjectCarousel from '@/components/Home/ProjectCarousel'
-import WorkHistory from '@/components/Home/WorkHistory'
+const Game = lazy(() => import('@/components/Home/Game'));
+const AboutMe = lazy(() => import('@/components/Home/AboutMe'));
+const ContactForm = lazy(() => import('@/components/Home/ContactForm'));
+const UpButton = lazy(() => import('@/components/Footer/UpButton'));
+const More = lazy(() => import('@/components/Home/More'));
+const ProjectCarousel = lazy(() => import('@/components/Home/ProjectCarousel'));
+const WorkHistory = lazy(() => import('@/components/Home/WorkHistory'));
 import Footer from '@/components/Footer/Footer'
 
 export default function Home() {
@@ -117,12 +118,19 @@ export default function Home() {
       />
       
       <Header darkMode={darkMode} toggleTheme={toggleTheme} />
-      <Game darkMode={darkMode} toggleTheme={toggleTheme} scrollToAboutMe={scrollToAboutMe} downButtonRef = {downButtonRef}/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Game darkMode={darkMode} toggleTheme={toggleTheme} scrollToAboutMe={scrollToAboutMe} downButtonRef = {downButtonRef}/>
+      </Suspense>
+
       <div ref={aboutMeRef}> 
         <AboutMe darkMode={darkMode}/>
       </div>
-      <ProjectCarousel darkMode={darkMode}/>
-      <WorkHistory darkMode = {darkMode}/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProjectCarousel darkMode={darkMode}/>
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <WorkHistory darkMode = {darkMode}/>
+      </Suspense>
       <ContactForm darkMode={darkMode}/>
       <UpButton onScrollToTop={scrollToTop} isButtonVisible={showFooter} darkMode={darkMode}/>
       <More darkMode={darkMode}/>

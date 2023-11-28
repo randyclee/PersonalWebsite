@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { AiOutlineLinkedin, AiOutlineGithub, AiOutlineMail } from 'react-icons/ai';
 import { FiSun, FiMoon, FiArrowDown } from 'react-icons/fi';
 
-
 export default function RandysWebsite({ darkMode, toggleTheme, scrollToAboutMe, downButtonRef }) {
   const canvasRef = useRef(null);
   const obstacleRefs = useRef([]);
@@ -244,7 +243,7 @@ export default function RandysWebsite({ darkMode, toggleTheme, scrollToAboutMe, 
       <div className="flex flex-col items-center justify-center w-full h-auto px-4 pt-40 mb-10">
 
         <div className="flex flex-col-reverse md:flex-row items-center justify-center mb-4 ">
-          <img ref={(el) => (obstacleRefs.current[4] = el)} className="w-60 h-60 md:w-80 md:h-80 mr-0 md:mr-8 rounded-full mb-4 md:mb-0" src="/randy.jpg" alt="Randy Lee" />
+          <Image width={800} height={1200} ref={(el) => (obstacleRefs.current[4] = el)} className="w-60 h-60 md:w-80 md:h-80 mr-0 md:mr-8 rounded-full mb-4 md:mb-0" src="/randy.jpg" alt="Randy Lee" />
           <div className="text-center md:text-left">
             <h1 ref={(el) => (obstacleRefs.current[2] = el)} className="text-3xl md:text-5xl mb-2">Hello, my name is Randy!</h1>
             <h1 ref={(el) => (obstacleRefs.current[3] = el)} className="text-md md:text-lg mb-5">I am a software engineer with a passion for business and technology</h1>

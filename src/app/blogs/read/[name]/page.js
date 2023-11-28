@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { fetchBlog } from '@/services/api/blogsApi';
 import Head from 'next/head'; 
 import ImageModal from '@/components/ImageModal'; // Import the ImageModal component
+import Image from 'next/image';
 
 
 const Home = ({params}) => {
@@ -126,7 +127,7 @@ const Home = ({params}) => {
         <h1 className="text-4xl font-bold mb-2 text-center">{blogData?.title}</h1>
         <p className="text-2xl mb-4">{blogData?.summary}</p>
         <div className="flex items-center mb-6">
-          <img src={blogData?.author.image} alt="author" width={800} height={400} className="w-10 h-10 rounded-full mr-4" />
+          <Image width={1200} height={500} src={blogData?.author.image} alt="author" width={800} height={400} className="w-10 h-10 rounded-full mr-4" />
           <div>
             <p className="text-sm">{new Date(blogData?.date).toLocaleDateString()}</p>
             <p className="text-lg font-semibold">{blogData?.author.name}</p>
@@ -138,7 +139,9 @@ const Home = ({params}) => {
             <h2 className="text-2xl font-semibold mb-2">{section.header}</h2>
             <p className="mb-2">{section.content}</p>
             {section.image && section.image !== "null" && (
-              <img 
+              <Image 
+                width={1200} 
+                height={500}  
                 src={`${process.env.APP_URL}${section.image}`} 
                 href="#" 
                 onClick={() => openImageModal(section.image)} 

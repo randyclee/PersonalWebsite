@@ -4,6 +4,7 @@ import { FiUser, FiChevronUp, FiChevronDown } from 'react-icons/fi';
 import ProjectDetailsModal from './ProjectDetailsModal';
 import ProjectSubmissionModal from './ProjectSubmissionModal';
 import { fetchAllVotes, vote } from '@/services/api/voteApi';
+import Image from 'next/image';
 
 export default function VotePage({ darkMode }) {
   const [projects, setProjects] = useState([]);
@@ -206,7 +207,7 @@ export default function VotePage({ darkMode }) {
               </div>
             )}
             <figure>
-              <img className="object-cover h-48 w-full" src={`${process.env.APP_URL}${project.imageUrl}`} alt="Project" />
+              <Image height={800} width={500} className="object-cover h-48 w-full" src={`${process.env.APP_URL}${project.imageUrl}`} alt="Project" />
             </figure>
             <div className="card-body">
               <div className="flex justify-between">

@@ -1,6 +1,7 @@
 'use client'
 import Header from '@/components/Header/Header'
-import Resume from '@/components/Resume/Resume'
+import React, { Suspense, lazy } from 'react';
+const Resume = lazy(() => import('@/components/Resume/Resume'));
 import Footer from '@/components/Footer/Footer'
 import { useState, useEffect } from 'react';
 
