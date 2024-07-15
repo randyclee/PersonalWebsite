@@ -86,7 +86,7 @@ export default function ProjectsPage({darkMode}) {
             type="text" 
             placeholder="Search Tags or Projects" 
             onChange={handleSearchChange}
-            className="w-full md:w-[40vw] px-4 py-2 mb-4 border border-gray-300 text-black rounded-full focus:outline-none"
+            className={`w-full md:w-[40vw] px-4 py-2 mb-6 border ${darkMode?"bg-gray-800 text-white border-gray-300":"bg-white text-black border-black" } rounded-full focus:outline-none`}
           />
         </div>
       <div className="flex items-center gap-3 mb-8">
