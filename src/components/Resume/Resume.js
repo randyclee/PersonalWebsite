@@ -114,7 +114,6 @@ export default function Resume({darkMode}) {
 
   // Refs for the sections and navigation buttons
   const sectionsRefs = {
-    summary: useRef(null),
     workExperience: useRef(null),
     projects: useRef(null),
     education: useRef(null),
@@ -269,18 +268,18 @@ export default function Resume({darkMode}) {
                 <h2 className="text-xl font-bold mb-3">SKILLS, CERTIFICATIONS, and AWARDS</h2>
 
                 <div className="mb-2">
-                    <p className="text-md "> <strong>Skills:</strong> Python, Next.js, JavaScript</p>
+                    <p className="text-md "> <strong>Languages/Frameworks:</strong> Python, Next.js, JavaScript, Tailwind, React.js, Java, HTML, CSS, SCSS</p>
+                </div>
+
+                <div className="mb-2">
+                    <p className="text-md "> <strong>Tools:</strong> Messaging systems, SQL, NoSQL (Document, Key-Value, Graph), Git, Agile Development, TDD, Hadoop</p>
                 </div>
                 
                 <div className="mb-2">
                     <p className="text-md"><strong>Certifications:</strong> Certificate in Business: Queen’s University (2022), Deep Learning Specialization: Coursera (2020)</p>
                 </div>
 
-                <div className="mb-2">
-                    <p className="text-md"><strong>Awards:</strong> Dean’s List (2021), Marketing Excellence Award (2019), The Excellence Scholarship (2017)</p>
-                </div>
             </section>
-
         </main>
         <script
             type="application/ld+json"
