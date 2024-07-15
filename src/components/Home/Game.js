@@ -246,8 +246,8 @@ export default function RandysWebsite({ darkMode, toggleTheme, scrollToAboutMe, 
           <Image width={800} height={1200} ref={(el) => (obstacleRefs.current[4] = el)} className="w-60 h-60 md:w-80 md:h-80 mr-0 md:mr-8 rounded-full mb-4 md:mb-0" src="/randy.jpg" alt="Randy Lee" />
           <div className="text-center md:text-left">
             <p ref={(el) => (obstacleRefs.current[2] = el)} className='text-3xl md:text-5xl mb-2 text-red-600'>Hello!</p>
-            <h1 ref={(el) => (obstacleRefs.current[2] = el)} className="text-3xl md:text-5xl mb-2"> My Name is <span className=' text-blue-600'>Randy!</span></h1>
-            <h1 ref={(el) => (obstacleRefs.current[3] = el)} className="text-md md:text-lg mb-5">I am a professional <span className=''>software engineer</span> with a </h1>
+            <h1 ref={(el) => (obstacleRefs.current[2] = el)} className="text-3xl md:text-5xl mb-2"> My Name is <span className=' text-blue-600'>Randy</span></h1>
+            <h1 ref={(el) => (obstacleRefs.current[3] = el)} className="text-md md:text-lg mb-5">I'm a Software Engineer. Come explore my digital home!</h1>
           </div>
         </div>
 
