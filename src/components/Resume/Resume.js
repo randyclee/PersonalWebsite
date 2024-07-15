@@ -203,15 +203,6 @@ export default function Resume({darkMode}) {
     </aside>
 
     <main className="col-span-2 lg:col-start-2 w-full">
-            <section id="summary" ref={sectionsRefs.summary} className="mb-8">                
-                <h2 className="text-xl font-bold mb-3">SUMMARY</h2>
-
-                <div className="mb-6">
-                <h3 className="text-md flex justify-between w-50%">
-                    <span>Aspiring product manager with one year of full-time software engineering experience. I am a fast learner and hard worker with a strong interest in both software and business, constantly making projects that allow me to practice those skills. I studied computer engineering and have a certificate in business.</span>
-                </h3>
-                </div>
-            </section>
             <section id="workExperience" ref={sectionsRefs.workExperience} className="mb-8">
               <h2 className="text-xl font-bold mb-3">WORK EXPERIENCE</h2>
               {WorkHistory.map((job) => (
