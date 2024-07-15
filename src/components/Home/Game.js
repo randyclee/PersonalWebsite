@@ -219,7 +219,7 @@ export default function RandysWebsite({ darkMode, toggleTheme, scrollToAboutMe, 
   return (
     <div 
       style={{ touchAction: gameStarted ? 'none' : 'auto', minHeight: '100vh'  }} 
-      className={`flex flex-col items-center w-full h-auto overflow-hidden relative ${darkMode ? 'bg-gradient-to-l from-black via-gray-900 to-black text-white' : 'bg-gradient-to-l from-white via-gray-100 to-white text-black'}`}
+      className={`flex flex-col items-center w-full h-auto overflow-hidden relative ${darkMode ? 'bg-gradient-to-l from-black via-gray-900 to-black text-gray-300' : 'bg-gradient-to-l from-white via-gray-100 to-white text-black'}`}
       {...handlers}
     >
       {!gameStarted ? (
@@ -245,8 +245,9 @@ export default function RandysWebsite({ darkMode, toggleTheme, scrollToAboutMe, 
         <div className="flex flex-col-reverse md:flex-row items-center justify-center mb-4 ">
           <Image width={800} height={1200} ref={(el) => (obstacleRefs.current[4] = el)} className="w-60 h-60 md:w-80 md:h-80 mr-0 md:mr-8 rounded-full mb-4 md:mb-0" src="/randy.jpg" alt="Randy Lee" />
           <div className="text-center md:text-left">
-            <h1 ref={(el) => (obstacleRefs.current[2] = el)} className="text-3xl md:text-5xl mb-2">Hello, my name is Randy!</h1>
-            <h1 ref={(el) => (obstacleRefs.current[3] = el)} className="text-md md:text-lg mb-5">I am a software engineer with a passion for business and technology</h1>
+            <p ref={(el) => (obstacleRefs.current[2] = el)} className='text-3xl md:text-5xl mb-2 text-red-600'>Hello!</p>
+            <h1 ref={(el) => (obstacleRefs.current[2] = el)} className="text-3xl md:text-5xl mb-2"> My Name is <span className=' text-blue-600'>Randy!</span></h1>
+            <h1 ref={(el) => (obstacleRefs.current[3] = el)} className="text-md md:text-lg mb-5">I am a professional <span className=''>software engineer</span> with a </h1>
           </div>
         </div>
 
@@ -257,21 +258,17 @@ export default function RandysWebsite({ darkMode, toggleTheme, scrollToAboutMe, 
             ref={(el) => (obstacleRefs.current[5] = el)}
             href="https://www.linkedin.com/in/randyclee"
             target="_blank"
-            className={`flex items-center border rounded-lg px-4 py-2 lg:mx-8 mx-2 transition-colors duration-300 ${
-              darkMode ? 'border-white hover:bg-white hover:text-black' : 'border-black hover:bg-black hover:text-white'
-            }`}
+            className={`flex items-center border-blue-700  text-blue-700  hover:text-blue-300 border rounded-lg px-4 py-2 lg:mx-8 mx-2 transition-colors duration-300`}
             style={{ zIndex: 1 }}
           >
-            <AiOutlineLinkedin className="w-6 h-6" />
+            <AiOutlineLinkedin className="w-6 h-6 " />
             <span className="hidden sm:inline ml-2">LinkedIn</span>
           </a>
           <a
             ref={(el) => (obstacleRefs.current[6] = el)}
             href="https://github.com/randyclee"
             target="_blank"
-            className={`flex items-center border rounded-lg px-4 py-2 lg:mx-8 mx-2 transition-colors duration-300 ${
-              darkMode ? 'border-white hover:bg-white hover:text-black' : 'border-black hover:bg-black hover:text-white'
-            }`}
+            className={`flex items-center border border-teal-700 text-teal-700 hover:text-teal-300 rounded-lg px-4 py-2 lg:mx-8 mx-2 transition-colors duration-300`}
             style={{ zIndex: 1 }}
           >
             <AiOutlineGithub className="w-6 h-6" />
@@ -279,10 +276,8 @@ export default function RandysWebsite({ darkMode, toggleTheme, scrollToAboutMe, 
           </a>
           <a
             ref={(el) => (obstacleRefs.current[7] = el)}
-            href="mailto:randy.c.lee2@gmail.com"
-            className={`flex items-center border rounded-lg px-4 py-2 lg:mx-8 mx-2 transition-colors duration-300 ${
-              darkMode ? 'border-white hover:bg-white hover:text-black' : 'border-black hover:bg-black hover:text-white'
-            }`}
+            href="mailto:rclee.business@gmail.com"
+            className={`flex items-center border border-sky-700 text-sky-700 hover:text-sky-300 rounded-lg px-4 py-2 lg:mx-8 mx-2 transition-colors duration-300`}
             style={{ zIndex: 1 }}
           >
             <AiOutlineMail className="w-6 h-6" />
@@ -291,9 +286,7 @@ export default function RandysWebsite({ darkMode, toggleTheme, scrollToAboutMe, 
           <button
             onClick={toggleTheme}
             ref={(el) => (obstacleRefs.current[8] = el)}
-            className={`flex items-center border rounded-lg px-4 py-2 lg:mx-8 mx-2 transition-colors duration-300 ${
-              darkMode ? 'border-white hover:bg-white hover:text-black' : 'border-black hover:bg-black hover:text-white'
-            }`}
+            className={`flex items-center border border-rose-700 text-rose-700 hover:text-rose-300 rounded-lg px-4 py-2 lg:mx-8 mx-2 transition-colors duration-300`}
             style={{ zIndex: 1 }}
           >
             {darkMode ? (

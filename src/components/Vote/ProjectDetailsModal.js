@@ -1,4 +1,6 @@
 import { FiX } from 'react-icons/fi'; 
+import Image from 'next/image';
+
 
 function ProjectDetailsModal({ isOpen, onClose, selectedProject, darkMode }) {
   if (!isOpen || !selectedProject) return null;
@@ -7,7 +9,7 @@ function ProjectDetailsModal({ isOpen, onClose, selectedProject, darkMode }) {
     <div className="modal modal-open">
       
 
-      <div className={`${darkMode ? 'bg-black text-white' : 'bg-white text-black'} modal-box relative`}>
+      <div className={`${darkMode ? 'bg-gray-700 text-white' : 'bg-white text-black'} modal-box relative`}>
       <button
             onClick={onClose}
             className="fixed top-0 left-0 text-red-600 rounded-full p-2 focus:outline-none"

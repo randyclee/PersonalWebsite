@@ -187,7 +187,7 @@ export default function VotePage({ darkMode }) {
   }, [projects]);
 
   return (
-    <div className={`${darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
+    <div className={`${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
       <div className={`container mx-auto px-4 py-14 min-h-screen`}>
         <h1 className="text-4xl font-bold text-center mt-10 mb-3">Vote on Projects</h1>
         <div className="text-center mb-6">
@@ -200,7 +200,7 @@ export default function VotePage({ darkMode }) {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {projects.map((project) => (
-          <div key={project._id} className={`${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} card w-full bg-base-100 shadow-xl relative`}>
+          <div key={project._id} className={`${darkMode ? 'bg-gray-700 text-white' : 'bg-white text-black'} card w-full bg-base-100 shadow-xl relative`}>
               {project.workInProgress && (
               <div className="absolute top-0 left-0 bg-yellow-500 text-white px-2 py-1 rounded">
                 Work In Progress
@@ -235,10 +235,10 @@ export default function VotePage({ darkMode }) {
               </div>
               )}
               <div className="card-actions justify-between mt-4">
-                <button className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-full w-30" onClick={() => openModal(project)}>
+                <button className="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-30" onClick={() => openModal(project)}>
                   Learn More
                 </button>
-                <button className="bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded-full w-30" onClick={() => handleVote(project._id)}>
+                <button className="bg-red-800 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-30" onClick={() => handleVote(project._id)}>
                   Vote
                 </button>
               </div>

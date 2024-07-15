@@ -78,7 +78,7 @@ const ProjectsCarousel = ({darkMode}) => {
   };
 
   return (
-    <div className = {`${darkMode ? 'bg-gradient-to-l from-black via-gray-900 to-black text-white' : 'bg-gradient-to-l from-white via-gray-100 to-white text-black'}`}>
+    <div className = {`${darkMode ? 'bg-gradient-to-l from-black via-gray-900 to-black text-gray-300' : 'bg-gradient-to-l from-white via-gray-100 to-white text-black'}`}>
     <style jsx global>{`
       .slick-dots li button:before {
         color: ${darkMode ? '#ffffff' : '#000000'} !important; /* Inactive dots */
@@ -106,13 +106,13 @@ const ProjectsCarousel = ({darkMode}) => {
   }
   .slick-prev:before, .slick-next:before {
     font-size: 2rem; 
-    color: ${darkMode ? 'white' : 'black'} !important; 
+    color: ${darkMode ? 'E0E0E0' : 'black'} !important; 
   }
 `}</style>
 
                 
     <div className="flex flex-col items-center justify-center py-10 ">
-      <h2 className="text-3xl font-bold mb-2">Featured Projects</h2>
+      <h2 className="text-3xl font-bold mb-2 ">Featured Projects</h2>
       <div className="w-full mx-auto pb-4">
   <Slider {...settings}>
     {projects.map((project, index) => (

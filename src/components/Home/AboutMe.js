@@ -13,13 +13,13 @@ export default function AboutMe({ darkMode }) {
   return (
     
     <div className={`duration-300 h-auto 
-      ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}
+      ${darkMode ? 'bg-gray-900 text-gray-300' : 'bg-white text-black'}
     `}>
       <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
       />
-      <div className="container mx-auto px-9 md:px-4  py-14 ">
-        <h2 className="text-3xl font-semibold text-center mb-6">
+      <div className="container mx-auto px-9 md:px-4 py-14 ">
+        <h2 className="text-3xl font-semibold text-center mb-6 ">
           About Me
         </h2>
         <p className="text-md md:text-lg leading-relaxed">
@@ -30,37 +30,37 @@ export default function AboutMe({ darkMode }) {
         {/* Tech stack and interests section */}
         <div className="grid grid-cols-3 gap-10 mt-10 mb-10">
           {/* Python */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-blue-700">
             <FaPython size={50} />
-            <span className="mt-2 text-lg">Python</span>
+            <span className="mt-2 text-lg ">Python</span>
           </div>
 
           {/* JavaScript */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-cyan-700">
             <FaJsSquare size={50} />
             <span className="mt-2 text-lg">JavaScript</span>
           </div>
 
           {/* Next.js */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-emerald-700">
             <SiNextdotjs size={50} />
             <span className="mt-2 text-lg">Next.js</span>
           </div>
 
           {/* TailwindCSS */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-purple-700">
             <SiTailwindcss size={50} />
             <span className="mt-2 text-lg">TailwindCSS</span>
           </div>
 
           {/* Databases */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-rose-700">
             <FaDatabase size={50} />
             <span className="mt-2 text-lg">Databases</span>
           </div>
 
           {/* AI */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-amber-700">
             <SiTensorflow size={50} />
             <span className="mt-2 text-lg ">AI</span>
           </div>

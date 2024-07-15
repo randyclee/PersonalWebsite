@@ -25,13 +25,13 @@ const WorkHistory = ({ darkMode }) => {
     };
   
     return (
-    <div className = {`${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+    <div className = {`${darkMode ? 'bg-gray-900 text-gray-300' : 'bg-white text-black'}`}>
       <div className="py-10 px-6 sm:mx-auto sm:w-full lg:w-3/5 ">
         <h2 className="text-3xl font-bold text-center mb-12">Professional Experience</h2>
         {jobs.map((job, index) => (
           <div
             key={job.id}
-            className={`"border p-8 rounded-lg shadow-xl mb-6 cursor-pointer ${darkMode ? " bg-gray-700 border-white" : ""} "`}
+            className={`"border p-8 rounded-lg shadow-xl mb-6 cursor-pointer ${darkMode ? " bg-gray-800 border-white" : ""} "`}
             onClick={() => toggleDescription(index)}
           >
             <div className="flex flex-col items-center text-center md:flex-row md:text-left md:items-start">

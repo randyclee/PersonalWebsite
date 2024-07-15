@@ -22,7 +22,6 @@ export default function Resume({darkMode}) {
     setProjects(projectData);
   };
 
-
   const resumeSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -112,9 +111,6 @@ export default function Resume({darkMode}) {
       "NoSQL"
     ]
   }
-  
-  
-
 
   // Refs for the sections and navigation buttons
   const sectionsRefs = {
@@ -168,7 +164,7 @@ export default function Resume({darkMode}) {
 
   const downloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/Randy_Lee_Resume.pdf'; 
+    link.href = '/Randy_Lee_Business_Resume.pdf'; 
     link.download = 'Randy_Lee_Resume.pdf'; 
     document.body.appendChild(link);
     link.click();
@@ -177,7 +173,7 @@ export default function Resume({darkMode}) {
 
   return (
 
-    <div className={`flex flex-col lg:grid lg:grid-cols-3 gap-4 mt-6 p-8 md:p-14 lg:px-20 lg:py-13 ${darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
+    <div className={`flex flex-col lg:grid lg:grid-cols-3 gap-4 mt-6 p-8 md:p-14 lg:px-20 lg:py-13 ${darkMode ? 'text-white bg-gray-800' : 'bg-white text-black'}`}>
       <aside className="col-span-1 lg:fixed lg:mt-16 lg:inset-y-0 lg:left-0 p-4 z-10 lg:h-screen flex flex-col items-center lg:w-1/3">
         <div className="space-y-2 w-full text-center  mb-2">
             <h1 className="text-4xl font-bold">Randy Lee</h1>
@@ -198,7 +194,7 @@ export default function Resume({darkMode}) {
         </div>
         <div className="p-4 w-full">
             <button
-                className="w-full bg-blue-500 text-white py-2 px-4 rounded"
+                className="w-full bg-blue-900 text-white py-2 px-4 rounded"
                 onClick={downloadResume}
             >
                 Download Resume

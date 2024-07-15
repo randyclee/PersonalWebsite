@@ -19,7 +19,7 @@ export default function ContactForm({darkMode}) {
   }
 
   return (
-    <div className={`flex justify-center items-center py-20 ${darkMode ? 'bg-gradient-to-l from-black via-gray-900 to-black text-white' : 'bg-gradient-to-l from-white via-gray-100 to-white text-black'}`}>
+    <div className={`flex justify-center items-center py-20 ${darkMode ? 'bg-gradient-to-l from-black via-gray-900 to-black text-gray-300' : 'bg-gradient-to-l from-white via-gray-100 to-white text-black'}`}>
       <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
       />
@@ -28,7 +28,7 @@ export default function ContactForm({darkMode}) {
         <form onSubmit={handleSubmit} className="space-y-4">  
           <div>
             <textarea
-              className={`w-full p-2 border border-gray-300 rounded-md ${darkMode ? "bg-gray-600 text-white":"bg-white text-black"}`}
+              className={`w-full p-2  rounded-md ${darkMode ? "bg-gray-800 text-white":"bg-white border border-black text-black"}`}
               placeholder="Your Message"
               required
               rows="4"
@@ -39,7 +39,7 @@ export default function ContactForm({darkMode}) {
           <div className="flex flex-wrap -mx-2">
             <div className="w-full sm:w-1/3 px-2 mb-4 sm:mb-0">
               <input
-                className={`w-full p-2 border border-gray-300 rounded-md ${darkMode ? "bg-gray-600 text-white":"bg-white text-black"}`}
+                className={`w-full p-2  rounded-md ${darkMode ? "bg-gray-800 text-white":"bg-white border border-black text-black"}`}
                 type="text"
                 placeholder="Your Name"
                 required
@@ -49,7 +49,7 @@ export default function ContactForm({darkMode}) {
             </div>
             <div className="w-full sm:w-2/3 px-2">
               <input
-                className={`w-full p-2 border border-gray-300 rounded-md ${darkMode ? "bg-gray-600 text-white":"bg-white text-black"}`}
+                className={`w-full p-2   rounded-md ${darkMode ? "bg-gray-800 text-white":"bg-white border border-black text-black"}`}
                 type="email"
                 placeholder="Your Email"
                 required
@@ -62,7 +62,7 @@ export default function ContactForm({darkMode}) {
           <div>
             <button
               type="submit"
-              className="w-full p-3 bg-blue-700 text-white rounded-md hover:bg-blue-900 transition-colors"
+              className="w-full p-3 bg-blue-900 rounded-md hover:bg-blue-700 transition-colors"
             >
               Send Message
             </button>

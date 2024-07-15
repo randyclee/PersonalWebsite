@@ -13,7 +13,7 @@ const BlogPreview = ({ darkMode, post }) => {
   };
 
   return (
-    <div className={`block p-4 shadow-xl ${darkMode?"bg-gray-700":"br-gray-200"} rounded-lg transition-all duration-300 ${expanded ? 'h-auto' : 'h-96'} w-full`}>
+    <div className={`block p-4 shadow-xl ${darkMode?"bg-gray-700 ":"bg-white"} rounded-lg transition-all duration-300 ${expanded ? 'h-auto' : 'h-96'} w-full`}>
         <a href={`/blogs/read/${post.slug}`} >
 
       <Image
@@ -29,7 +29,7 @@ const BlogPreview = ({ darkMode, post }) => {
         <p className={`text-center text-sm ${!expanded ? 'line-clamp-3' : ''}`}>{post.summary}</p>
       </div>
       </a>
-      <button onClick={toggleExpanded} className="text-center w-full mt-2 text-blue-400 mb-2">
+      <button onClick={toggleExpanded} className="text-center w-full mt-2 mb-2 hover:text-gray-400">
         {expanded ? 'Less ↑' : 'More ↓'}
       </button>
     </div>
@@ -144,7 +144,7 @@ const Main = () => {
   
 
   return (
-    <div className={`${darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
+    <div className={`${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
       <Header darkMode={darkMode} toggleTheme={toggleTheme}/>
       <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 mt-16`}>
         <h1 className="text-4xl font-bold mb-6">Latest Blog Posts</h1>
